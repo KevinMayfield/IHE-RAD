@@ -11,3 +11,8 @@ Interactions in [IHE Radiology (RAD) Technical Framework - Volume 2 IHE RAD TF-2
 <p id="fX.X.X.X-X" class="figureTitle">IHE SWF and SINR Actor Diagram</p>
 </figure>
 <br clear="all">
+
+Alternative formats to HL7 v2 ORU_R01 include:
+
+- [HL7 Europe Imaging Study Report](https://build.fhir.org/ig/hl7-eu/imaging/branches/initial-version/index.html)
+- NHS England North West Genomics have [Laboratory Results](https://interop-nwengland.github.io/LTW-Genomics/LAB-3.html#laboratory-results) which is a one-2-one map of HL7 v2 ORU_R01
