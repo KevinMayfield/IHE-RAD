@@ -23,7 +23,7 @@ contact:
         value: iti@ihe.net
 license:  CC-BY-4.0
 fhirVersion: 4.0.1
-jurisdiction: 'http://unstats.un.org/unsd/methods/m49/m49.htm#001'
+jurisdiction: urn:iso:std:iso:3166#GB "United Kingdom of Great Britain and Northern Ireland"
 #copyright: IHE http://www.ihe.net/Governance/#Intellectual_Property
 copyrightYear: 2024+
 
