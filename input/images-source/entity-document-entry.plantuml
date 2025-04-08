@@ -1,0 +1,94 @@
+@startuml
+
+skinparam svgDimensionStyle false
+
+package healthdocuments as "Health Documents" {
+
+  entity "[[StructureDefinition-DocumentEntry.html Document Entry]]" as document  <<aggregate root>>  {
+    identifier
+    subject : PatientIdentifier
+    custodian:OrganisationIdentifier
+    author:  OrganisationIdentifier or PractitionerIdentifier
+    category: DocumentClass
+    type: DocumentType
+    facilityType: [[ValueSet-facility-type.html FacilityType]]
+    practiceSetting: [[ValueSet-specialty.html Specialty]]
+    period : Period
+    encounter: EncounterIdentifier
+    attachment : Attachment
+    related: Radiological Accession Number
+  }
+
+  entity "Attachment" as attachment <<entity>> {
+    url
+    }
+
+  entity "[[StructureDefinition-Document.html Document]]" as Document <<entity>> {
+  }
+  entity "[[StructureDefinition-Image.html Image]]" as image <<entity>> {
+  }
+
+  class "[[ValueSet-document-entry-class.html DocumentClass]]" as DocumentClass <<value>> {
+    }
+
+  class "[[ValueSet-document-entry-type.html DocumentType]]" as DocumentType <<value>> {
+
+  }
+
+
+    DocumentClass -d-> DocumentType : parent of
+
+}
+
+
+package Workflow {
+  class "[[StructureDefinition-accession-number.html Radiological Accession Number]]" as RadiologicalAccessionNumber {
+  }
+}
+
+package PatientAdministration as "Patient Administration" {
+
+
+
+  class "[[StructureDefinition-patient-identifier.html PatientIdentifier]]" as PatientIdentifier <<value>> {
+  }
+
+
+
+  class EncounterIdentifier <<value>> {
+    identifier
+  }
+
+  PatientIdentifier -d[hidden]- EncounterIdentifier
+}
+
+
+package directories as "Care Directories" {
+
+class "[[StructureDefinition-organisation-identifier.html OrganisationIdentifier]]" as OrganisationIdentifier <<value>> {
+}
+
+class "[[StructureDefinition-practitioner-identifier.html PractitionerIdentifier]]" as PractitionerIdentifier <<value>>  {
+}
+
+  OrganisationIdentifier -d[hidden]- PractitionerIdentifier
+
+}
+
+
+
+  document o--> DocumentClass
+  document o--> DocumentType
+  document o--> attachment
+
+  attachment --> Document : url
+   attachment --> image : url
+
+document -d-> PatientIdentifier : subject
+  document o--> EncounterIdentifier: encounter
+  document o-d-> OrganisationIdentifier : custodian and author
+  document o--> PractitionerIdentifier: author
+  document o--> RadiologicalAccessionNumber: related
+
+
+@enduml

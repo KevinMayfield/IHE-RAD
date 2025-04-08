@@ -1,0 +1,81 @@
+@startuml
+
+skinparam svgDimensionStyle false
+
+package healthdocuments as "Radiology" {
+
+  entity "[[StructureDefinition-DiagnosticReport.html Diagnostic Report]]" as diagnosticReport  <<aggregate root>>  {
+    identifier
+    subject : PatientIdentifier
+    performer [organisation] :OrganisationIdentifier
+    performer [primary reporter]:   PractitionerIdentifier
+    performer [secondary reporter]:   PractitionerIdentifier
+    performer [technician]:   PractitionerIdentifier
+    category: [[ValueSet-modality.html Modality]]
+    code: [[ValueSet-imaging-code-nicip.html IMAGING CODE (NICIP)]]
+    effectiveDateTime
+    encounter: EncounterIdentifier
+    attachment : Attachment
+    basedOn: Radiological Accession Number
+  }
+
+  entity "Attachment" as attachment <<entity>> {
+    url
+    data
+    }
+
+  entity "[[StructureDefinition-Document.html Document]]" as Document <<entity>> {
+  }
+
+
+
+}
+
+
+package Workflow {
+  class "[[StructureDefinition-accession-number.html Radiological Accession Number]]" as RadiologicalAccessionNumber <<value>> {
+  }
+}
+
+package PatientAdministration as "Patient Administration" {
+
+
+  class "[[StructureDefinition-patient-identifier.html PatientIdentifier]]" as PatientIdentifier <<value>> {
+  }
+
+
+
+  class EncounterIdentifier <<value>> {
+    identifier
+  }
+
+  PatientIdentifier -d[hidden]- EncounterIdentifier
+}
+
+
+package directories as "Care Directories" {
+
+class "[[StructureDefinition-organisation-identifier.html OrganisationIdentifier]]" as OrganisationIdentifier <<value>> {
+}
+
+class "[[StructureDefinition-practitioner-identifier.html PractitionerIdentifier]]" as PractitionerIdentifier <<value>>  {
+}
+
+  OrganisationIdentifier -d[hidden]- PractitionerIdentifier
+
+}
+
+
+  diagnosticReport o--> attachment
+
+  attachment o--> Document : data
+
+
+  diagnosticReport -d-> PatientIdentifier : subject
+  diagnosticReport o--> EncounterIdentifier: encounter
+  diagnosticReport o-d-> OrganisationIdentifier : performer [organisation]
+  diagnosticReport o--> PractitionerIdentifier: performer [reporter and technician]
+  diagnosticReport o--> RadiologicalAccessionNumber: basedOn
+
+
+@enduml

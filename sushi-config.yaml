@@ -1,0 +1,105 @@
+# sushi-config.yaml is documented https://fshschool.org/docs/sushi/configuration/
+# ───────────────────────────────────────────────────
+# the id should be lowercase made up of "ihe." + {domain acronym} + "." + {profile acronym/short-name}
+# e.g. ihe.iti.mhds, or ihe.iti.basicaudit
+id: nhs.england.rad
+canonical: https://fhir.nhs.uk/England/RAD
+version: 0.0.1-current
+name: NIR_England_National_Imaging_Registry
+title: "Radiology (Sandbox)"
+description: put the short description of the profile here. it should explain what problem is being solved
+releaseLabel: ci-build
+
+status: draft
+publisher:
+  ## Find your domain contact on the https://www.ihe.net/ihe_domains page
+  - name: NHS England
+  - url: https://www.ihe.net/ihe_domains/it_infrastructure/
+  - email: iti@ihe.net
+contact:
+  - name: NHS England
+    telecom:
+      - system: email
+        value: iti@ihe.net
+license:  CC-BY-4.0
+fhirVersion: 4.0.1
+jurisdiction: 'http://unstats.un.org/unsd/methods/m49/m49.htm#001'
+#copyright: IHE http://www.ihe.net/Governance/#Intellectual_Property
+copyrightYear: 2024+
+
+dependencies:
+  fhir.r4.ukcore.stu2:
+    version: 2.1.0
+    uri: https://simplifier.net/guide/ukcoreversionhistory
+  ihe.iti.mhd: 4.2.1  
+  ihe.rad.imr: 1.1.0
+  hl7.fhir.extensions.r5:
+    id: r5ext
+    version: 4.0.1
+    reason: |
+      Makes available certain R5 elements for use as part of this R4 IG
+
+FSHOnly: false
+# see https://confluence.hl7.org/display/FHIR/Implementation+Guide+Parameters
+parameters:
+  path-binary: input/binary
+  path-resource:
+    - input/resources
+    - fsh-generated/resources
+    - input/examples
+  show-inherited-invariants: 'false'
+  usage-stats-opt-out: 'false'
+  logging: progress
+  shownav: 'true'
+  active-tables: 'false'
+  apply-contact: 'true'
+  apply-jurisdiction: 'true'
+  apply-publisher: 'true'
+  apply-version: 'true'
+  excludexml: 'false'
+  excludejsn: 'false'
+  excludettl: 'true'
+  excludemap: 'true'
+  excludeexample: 'false'
+  generate:
+    - xml
+    - json
+
+
+#resources:
+# list every example here with a name, description and that exampleBoolean is true; These are used to populate the artifacts page, and are needed to eliminate build warnings 
+# You may delay filling out this section until you approach publication as it is merely a nice to have and eliminates build warnings -- If you do this then you will need above the autoload-resources true
+instanceOptions:
+  setMetaProfile: never
+
+pages:
+  index.md:
+    title: Home
+    generation: markdown
+  usecase-imaging.md:
+    title: Imaging
+    generation: markdown
+
+groups:
+  -ex-scenario-IHE:
+    name: "Example: IHE Radiology Context"
+    description: "Examples associated with [IHE Radiology](https://www.ihe.net/ihe_domains/radiology/) to support National Imaging Registry"
+    resources:
+      - DocumentReference/DocumentReferenceImagingReportIHE
+      - DocumentReference/DocumentReferenceImagingStudyIHE
+      - DocumentReference/DocumentReferenceImagingStudyMinimalMetadata
+      - DiagnosticReport/DiagnosticReportImagingReportRCR
+  -ex-scenario-NRL:
+    name: "Example: NIR/NRL Context"
+    description: "Examples associated with the extension of National Record Locator to support National Imaging Registry"
+    resources:
+      - DocumentReference/DocumentReferenceImagingReportNRL
+      - DocumentReference/DocumentReferenceImagingStudyNRL
+      - DiagnosticReport/DiagnosticReportImagingReportNRL
+
+menu:
+  Home: index.html
+  Use Case: usecase-imaging.html
+  Artefacts: artifacts.html
+
+
