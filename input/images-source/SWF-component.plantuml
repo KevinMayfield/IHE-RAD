@@ -1,0 +1,18 @@
+@startuml
+
+title "IHE SWF and SINR Actor Diagram (abstract)"
+
+agent "Order Placer" as Placer
+agent "Order Filler" as Filler
+agent "Image Manager" as dicom
+agent "Report Manager" as oru
+
+dicom -d[hidden]- oru
+
+Placer -r-> Filler: Placer Order Management New (RAD-2)\nHL7 v2.5.1 OMG_O19
+Filler -r-> dicom: Images Availablity Query (RAD-11)
+Filler -l-> Placer: Order Status Update (RAD-3)\nHL7 v2.5.1 OMG_O19
+
+oru -l-> Placer: Structured Report Export (RAD-28)\nHL7 v2.5.1 ORU_R01
+
+@enduml
