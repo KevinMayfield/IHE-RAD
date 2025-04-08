@@ -102,7 +102,7 @@ groups:
 
 menu:
   Home: index.html
-  Use Case: usecase-imaging.html
+  #Use Case: usecase-imaging.html
   Analysis and Design (Vol 1) :
     Scheduled Workflow: scheduled-workflow.html
   Artefacts: artifacts.html

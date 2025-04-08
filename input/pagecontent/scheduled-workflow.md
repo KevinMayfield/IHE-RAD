@@ -14,5 +14,6 @@ Interactions in [IHE Radiology (RAD) Technical Framework - Volume 2 IHE RAD TF-2
 
 Alternative formats to HL7 v2 ORU_R01 include:
 
-- [HL7 Europe Imaging Study Report](https://build.fhir.org/ig/hl7-eu/imaging/branches/initial-version/index.html)
-- NHS England North West Genomics have [Laboratory Results](https://interop-nwengland.github.io/LTW-Genomics/LAB-3.html#laboratory-results) which is a one-2-one map of HL7 v2 ORU_R01
+- [HL7 Europe Imaging Study Report](https://build.fhir.org/ig/hl7-eu/imaging/branches/initial-version/index.html) which is suitable option for Health Document Sharing systems such as IHE XDS/MHDS (CDA Replacement)
+- NHS England North West Genomics have [Laboratory Results](https://interop-nwengland.github.io/LTW-Genomics/LAB-3.html#laboratory-results) which is a one-2-one map of HL7 v2 ORU_R01 (HL7 v2 Replacement)
+- [IHE Radiology Technical Framework Supplement - Imaging Diagnostic Report (IDR)](https://www.ihe.net/uploadedFiles/Documents/Radiology/IHE_RAD_Suppl_IDR_Rev1-0_PC_2024-05-09.pdf) and [IHE Imaging Diagnostic Report](https://build.fhir.org/ig/IHE/RAD.IDR/) which documents data standards for use with a Clinical Data  Repository and so FHIR RESTful.
