@@ -2,7 +2,9 @@
 
 entity "FHIR ImagingStudy" as ImagingStudy
 entity "Imaging Finding\n(FHIR Observation)" as Observation
-entity "Imaging Exam Report\n(FHIR DiagnosticReport)" as DiagnosticReport
+entity "Imaging Exam Report\n(FHIR DiagnosticReport)" as DiagnosticReport {
+code: NICIP
+}
 entity "DICOM" as DICOM
 entity "Imaging Anotation\n(FHIR Observation)" as Anotation
 entity "PDF Report\n(FHIR Binary))" as Binary
