@@ -1,15 +1,21 @@
 @startuml
 
-component "FHIR ImagingStudy" as ImagingStudy
-component "Imaging Finding\n(FHIR Observation)" as Observation
-component "Imaging Exam Report\n(FHIR DiagnosticReport)" as DiagnosticReport
-component "DICOM WebServer" as DICOM
-component "Imaging Anotation\n(FHIR Observation)" as Anotation
+entity "FHIR ImagingStudy" as ImagingStudy
+entity "Imaging Finding\n(FHIR Observation)" as Observation
+entity "Imaging Exam Report\n(FHIR DiagnosticReport)" as DiagnosticReport
+entity "DICOM WebServer" as DICOM
+entity "Imaging Anotation\n(FHIR Observation)" as Anotation
+entity "PDF Report\n(FHIR Binary))" as Binary
+entity "Document Metadata\n(FHIR DocumentReference)" as DocumentReference
 
 DiagnosticReport -r-> Observation: result
 Observation -r-> Anotation: derivedFrom
 Observation -u-> ImagingStudy : partOf
 ImagingStudy -r-> DICOM : generate WADO-RS url
 DiagnosticReport -u-> ImagingStudy: ImagingStudy
+DiagnosticReport -d-> Binary: presentedForm.url
+DiagnosticReport -d-> DocumentReference: media (r5)
+DocumentReference -r-> Binary : content.attachment.url
+
 
 @enduml
