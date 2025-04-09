@@ -1,0 +1,15 @@
+@startuml
+
+component "FHIR ImagingStudy" as ImagingStudy
+component "Imaging Finding\n(FHIR Observation)" as Observation
+component "Imaging Exam Report\n(FHIR DiagnosticReport)" as DiagnosticReport
+component "DICOM WebServer" as DICOM
+component "Imaging Anotation\n(FHIR Observation)" as Anotation
+
+DiagnosticReport -r-> Observation: result
+Observation -r-> Anotation: derivedFrom
+Observation -u-> ImagingStudy : partOf
+ImagingStudy -r-> DICOM : generate WADO-RS url
+DiagnosticReport -u-> ImagingStudy: ImagingStudy
+
+@enduml
